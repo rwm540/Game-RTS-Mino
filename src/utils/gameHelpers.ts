@@ -124,6 +124,10 @@ export function createBuilding(type: BuildingType, player: PlayerType, x: number
       hp = 1500;
       size = 50;
       break;
+    case BuildingType.MINTING_CENTER:
+      hp = 1200;
+      size = 40;
+      break;
   }
 
   return {
@@ -172,6 +176,7 @@ export function getBuildingCost(type: BuildingType): { minerals: number } {
     case BuildingType.WEAPONS_FACTORY: return { minerals: 200 };
     case BuildingType.AMMO_FACTORY: return { minerals: 150 };
     case BuildingType.TANK_FACTORY: return { minerals: 300 };
+    case BuildingType.MINTING_CENTER: return { minerals: 200 };
   }
 }
 
@@ -184,6 +189,7 @@ export function getBuildingBuildTime(type: BuildingType): number {
     case BuildingType.WEAPONS_FACTORY: return 700;
     case BuildingType.AMMO_FACTORY: return 600;
     case BuildingType.TANK_FACTORY: return 1000;
+    case BuildingType.MINTING_CENTER: return 500;
   }
 }
 

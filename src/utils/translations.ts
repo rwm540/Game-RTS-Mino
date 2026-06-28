@@ -74,6 +74,8 @@ export const translations = {
     ccRequired: "❌ Must build a Command Center first!",
     barracksRequired: "❌ Barracks requires a completed Command Center!",
     turretRequired: "❌ Turrets require a completed Command Center!",
+    mintRequired: "❌ Minting Center requires a completed Command Center!",
+    mint: "Minting Center (Central Bank)",
     leakedLogs: "Leaked Battle Logs (Saved Records)",
     noLogs: "No battle records decrypted yet. Defeats will be recorded here."
   },
@@ -147,6 +149,8 @@ export const translations = {
     ccRequired: "❌ ابتدا باید مرکز فرماندهی (قلعه) بسازید!",
     barracksRequired: "❌ ساخت سربازخانه به مرکز فرماندهی (قلعه) فعال نیاز دارد!",
     turretRequired: "❌ ساخت برجک به مرکز فرماندهی (قلعه) فعال نیاز دارد!",
+    mintRequired: "❌ ساخت چاپخانه پول به مرکز فرماندهی (قلعه) فعال نیاز دارد!",
+    mint: "چاپخانه پول (بانک مرکزی)",
     leakedLogs: "پرونده‌های لورفته (تاریخچه نبردها)",
     noLogs: "هیچ پرونده نبردی رمزگشایی نشده است. شکست‌های قبلی در این منو ذخیره خواهند شد."
   }

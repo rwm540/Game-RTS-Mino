@@ -170,7 +170,7 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
   });
 
   // Map Constants
-  const MAP_SIZE = 1600;
+  const MAP_SIZE = 2400;
 
   // Initialize once
   useEffect(() => {
@@ -189,18 +189,18 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     stateRef.current.aiMaxAttackCooldown = waveCooldown;
     stateRef.current.aiAttackCooldown = waveCooldown;
 
-    // 2. Define the 10 Factions
+    // 2. Define the 10 Factions (Redistributed over 2400x2400 space)
     const initialFactions = [
-      { id: 'player', name: 'شما (جمهوری پارس)', leader: 'فرمانده آریا', avatar: '👑', relation: 100, status: 'ALLY' as const, castleX: 150, castleY: 1450 },
-      { id: 'enemy', name: 'لشکر سیاه اهریمن', leader: 'اسفندیار تاریک', avatar: '💀', relation: 0, status: 'WAR' as const, castleX: 1450, castleY: 150 },
-      { id: 'f1', name: 'قلعه بابک (آذربایجان)', leader: 'بابک خرمدین', avatar: '🦅', relation: 50, status: 'NEUTRAL' as const, castleX: 200, castleY: 200 },
-      { id: 'f2', name: 'قلعه توس (خراسان)', leader: 'پهلوان طوس', avatar: '🦁', relation: 50, status: 'NEUTRAL' as const, castleX: 800, castleY: 200 },
-      { id: 'f3', name: 'قلعه اصفهان (سپاهان)', leader: 'کیقباد دوم', avatar: '🕌', relation: 50, status: 'NEUTRAL' as const, castleX: 1400, castleY: 800 },
-      { id: 'f4', name: 'قلعه بیشاپور (فارس)', leader: 'شاهپور ساسانی', avatar: '🏺', relation: 50, status: 'NEUTRAL' as const, castleX: 800, castleY: 1400 },
-      { id: 'f5', name: 'قلعه هگمتانه (ماد)', leader: 'دیااکو بزرگ', avatar: '🏛️', relation: 60, status: 'NEUTRAL' as const, castleX: 200, castleY: 800 },
-      { id: 'f6', name: 'قلعه ری (کاسپین)', leader: 'مازیار طبرستانی', avatar: '🌊', relation: 55, status: 'NEUTRAL' as const, castleX: 500, castleY: 500 },
-      { id: 'f7', name: 'قلعه شوش (خوزستان)', leader: 'شاه اونتاش ناپیریشا', avatar: '🌾', relation: 45, status: 'NEUTRAL' as const, castleX: 1100, castleY: 1100 },
-      { id: 'f8', name: 'قلعه زابل (نیمروز)', leader: 'رستم پهلوان', avatar: '🏹', relation: 65, status: 'NEUTRAL' as const, castleX: 500, castleY: 1100 }
+      { id: 'player', name: 'شما (جمهوری پارس)', leader: 'فرمانده آریا', avatar: '👑', relation: 100, status: 'ALLY' as const, castleX: 200, castleY: 2200 },
+      { id: 'enemy', name: 'لشکر سیاه اهریمن', leader: 'اسفندیار تاریک', avatar: '💀', relation: 0, status: 'WAR' as const, castleX: 2200, castleY: 200 },
+      { id: 'f1', name: 'قلعه بابک (آذربایجان)', leader: 'بابک خرمدین', avatar: '🦅', relation: 50, status: 'NEUTRAL' as const, castleX: 250, castleY: 250 },
+      { id: 'f2', name: 'قلعه توس (خراسان)', leader: 'پهلوان طوس', avatar: '🦁', relation: 50, status: 'NEUTRAL' as const, castleX: 1200, castleY: 250 },
+      { id: 'f3', name: 'قلعه اصفهان (سپاهان)', leader: 'کیقباد دوم', avatar: '🕌', relation: 50, status: 'NEUTRAL' as const, castleX: 2150, castleY: 1200 },
+      { id: 'f4', name: 'قلعه بیشاپور (فارس)', leader: 'شاهپور ساسانی', avatar: '🏺', relation: 50, status: 'NEUTRAL' as const, castleX: 1200, castleY: 2150 },
+      { id: 'f5', name: 'قلعه هگمتانه (ماد)', leader: 'دیااکو بزرگ', avatar: '🏛️', relation: 60, status: 'NEUTRAL' as const, castleX: 250, castleY: 1200 },
+      { id: 'f6', name: 'قلعه ری (کاسپین)', leader: 'مازیار طبرستانی', avatar: '🌊', relation: 55, status: 'NEUTRAL' as const, castleX: 700, castleY: 700 },
+      { id: 'f7', name: 'قلعه شوش (خوزستان)', leader: 'شاه اونتاش ناپیریشا', avatar: '🌾', relation: 45, status: 'NEUTRAL' as const, castleX: 1700, castleY: 1700 },
+      { id: 'f8', name: 'قلعه زابل (نیمروز)', leader: 'رستم پهلوان', avatar: '🏹', relation: 65, status: 'NEUTRAL' as const, castleX: 700, castleY: 1700 }
     ];
     stateRef.current.factions = initialFactions;
     setFactions(initialFactions);
@@ -211,16 +211,16 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     const mineralsNodes: ResourceNode[] = [];
 
     // Player starting workers
-    const w1 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 180, 1300);
+    const w1 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 220, 2050);
     w1.factionId = 'player';
     units.push(w1);
-    const w2 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 220, 1300);
+    const w2 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 260, 2050);
     w2.factionId = 'player';
     units.push(w2);
-    const w3 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 250, 1340);
+    const w3 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 290, 2090);
     w3.factionId = 'player';
     units.push(w3);
-    const w4 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 150, 1340);
+    const w4 = createUnit(UnitType.WORKER, PlayerType.PLAYER, 190, 2090);
     w4.factionId = 'player';
     units.push(w4);
 
@@ -266,13 +266,13 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       });
     });
 
-    // Also spawn player starting mineral nodes
+    // Also spawn player starting mineral nodes near bottom-left base
     const pResTypes = [ResourceType.GOLD, ResourceType.GOLD, ResourceType.WOOD, ResourceType.WOOD, ResourceType.STONE, ResourceType.IRON];
     pResTypes.forEach((rType, idx) => {
       const angle = (idx / pResTypes.length) * Math.PI * 2;
-      const dist = 130 + Math.random() * 30;
-      const rx = 180 + Math.cos(angle) * dist;
-      const ry = 1300 + Math.sin(angle) * dist;
+      const dist = 135 + Math.random() * 30;
+      const rx = 220 + Math.cos(angle) * dist;
+      const ry = 2100 + Math.sin(angle) * dist;
       mineralsNodes.push({
         id: `res_player_${idx}`,
         x: Math.max(50, Math.min(rx, MAP_SIZE - 50)),
@@ -284,12 +284,14 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       });
     });
 
-    // Spawn some rich contested neutral nodes in the map center
-    mineralsNodes.push({ id: 'nm1', x: 800, y: 800, amount: 6000, maxAmount: 6000, size: 24, resourceType: ResourceType.GOLD });
-    mineralsNodes.push({ id: 'nm2', x: 740, y: 860, amount: 5000, maxAmount: 5000, size: 20, resourceType: ResourceType.IRON });
-    mineralsNodes.push({ id: 'nm3', x: 860, y: 740, amount: 5000, maxAmount: 5000, size: 20, resourceType: ResourceType.STONE });
-    mineralsNodes.push({ id: 'nm4', x: 860, y: 860, amount: 5000, maxAmount: 5000, size: 20, resourceType: ResourceType.WOOD });
-    mineralsNodes.push({ id: 'nm5', x: 740, y: 740, amount: 4000, maxAmount: 4000, size: 20, resourceType: ResourceType.OIL });
+    // Spawn rich contested neutral nodes in the center of the expanded map (1200, 1200)
+    mineralsNodes.push({ id: 'nm1', x: 1200, y: 1200, amount: 8000, maxAmount: 8000, size: 26, resourceType: ResourceType.GOLD });
+    mineralsNodes.push({ id: 'nm2', x: 1140, y: 1260, amount: 6000, maxAmount: 6000, size: 22, resourceType: ResourceType.IRON });
+    mineralsNodes.push({ id: 'nm3', x: 1260, y: 1140, amount: 6000, maxAmount: 6000, size: 22, resourceType: ResourceType.STONE });
+    mineralsNodes.push({ id: 'nm4', x: 1260, y: 1260, amount: 6000, maxAmount: 6000, size: 22, resourceType: ResourceType.WOOD });
+    mineralsNodes.push({ id: 'nm5', x: 1140, y: 1140, amount: 5000, maxAmount: 5000, size: 22, resourceType: ResourceType.OIL });
+    mineralsNodes.push({ id: 'nm6', x: 1200, y: 1080, amount: 5000, maxAmount: 5000, size: 20, resourceType: ResourceType.COAL });
+    mineralsNodes.push({ id: 'nm7', x: 1200, y: 1320, amount: 5000, maxAmount: 5000, size: 20, resourceType: ResourceType.IRON });
 
     stateRef.current.units = units;
     stateRef.current.buildings = buildings;
@@ -297,7 +299,7 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
 
     // Reset camera to player base on startup
     stateRef.current.camera.x = 0;
-    stateRef.current.camera.y = 1000;
+    stateRef.current.camera.y = 1700;
 
     sound.playBuildComplete();
   }, [difficulty]);
@@ -318,9 +320,10 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       stateRef.current.camera.width = canvas.width;
       stateRef.current.camera.height = canvas.height;
 
-      // Keep camera inside boundaries
-      stateRef.current.camera.x = Math.max(0, Math.min(MAP_SIZE - canvas.width, stateRef.current.camera.x));
-      stateRef.current.camera.y = Math.max(0, Math.min(MAP_SIZE - canvas.height, stateRef.current.camera.y));
+      // Keep camera inside boundaries with friendly scroll-out margins
+      const camPad = 400;
+      stateRef.current.camera.x = Math.max(-camPad, Math.min(MAP_SIZE - canvas.width + camPad, stateRef.current.camera.x));
+      stateRef.current.camera.y = Math.max(-camPad, Math.min(MAP_SIZE - canvas.height + camPad, stateRef.current.camera.y));
     };
 
     resizeCanvas();
@@ -349,10 +352,13 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       e.preventDefault();
       const state = stateRef.current;
       const cam = state.camera;
-      const scrollSpeed = 1.0;
 
-      state.camera.x = Math.max(0, Math.min(MAP_SIZE - cam.width, cam.x + e.deltaX * scrollSpeed));
-      state.camera.y = Math.max(0, Math.min(MAP_SIZE - cam.height, cam.y + e.deltaY * scrollSpeed));
+      // Mouse wheel panning with padding and higher speed
+      const camPad = 400;
+      const scrollSpeed = 1.3;
+
+      state.camera.x = Math.max(-camPad, Math.min(MAP_SIZE - cam.width + camPad, cam.x + e.deltaX * scrollSpeed));
+      state.camera.y = Math.max(-camPad, Math.min(MAP_SIZE - cam.height + camPad, cam.y + e.deltaY * scrollSpeed));
     };
 
     window.addEventListener('keydown', handleKeyDown, { passive: false });
@@ -423,19 +429,20 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     // Keyboard Map Scrolling (WASD & Arrows)
     const keys = keysPressedRef.current;
     const cam = state.camera;
-    const camSpeed = 15; // fast smooth camera panning
+    const camSpeed = 26; // much faster and smoother camera panning
+    const camPad = 400;
 
     if (keys['w'] || keys['arrowup']) {
-      cam.y = Math.max(0, cam.y - camSpeed);
+      cam.y = Math.max(-camPad, cam.y - camSpeed);
     }
     if (keys['s'] || keys['arrowdown']) {
-      cam.y = Math.min(MAP_SIZE - cam.height, cam.y + camSpeed);
+      cam.y = Math.min(MAP_SIZE - cam.height + camPad, cam.y + camSpeed);
     }
     if (keys['a'] || keys['arrowleft']) {
-      cam.x = Math.max(0, cam.x - camSpeed);
+      cam.x = Math.max(-camPad, cam.x - camSpeed);
     }
     if (keys['d'] || keys['arrowright']) {
-      cam.x = Math.min(MAP_SIZE - cam.width, cam.x + camSpeed);
+      cam.x = Math.min(MAP_SIZE - cam.width + camPad, cam.x + camSpeed);
     }
 
     // Worker Auto-Assignment AI Loop (Runs every 30 game ticks)
@@ -1132,6 +1139,11 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     setWorkerAssignments(newAssignments);
   };
 
+  const handleUpdateResources = (newResources: typeof resources) => {
+    stateRef.current.resources = newResources;
+    setResources(newResources);
+  };
+
   const handleUpdateRelation = (factionId: string, delta: number) => {
     const state = stateRef.current;
     const fac = state.factions.find(f => f.id === factionId);
@@ -1221,235 +1233,486 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     ctx.save();
     ctx.translate(-cam.x, -cam.y);
 
-    // 1. Draw Map Battlefield Floor Grid
-    ctx.fillStyle = '#061a12'; // deep mossy tactical battlefield color
+    // 1. Draw Map Battlefield Floor Grid (Premium obsidian emerald slate)
+    ctx.fillStyle = '#06100d'; // deep sleek dark tactical base
     ctx.fillRect(0, 0, MAP_SIZE, MAP_SIZE);
 
-    // Draw grid lines
-    ctx.strokeStyle = '#064e3b';
-    ctx.lineWidth = 1;
+    // Highly professional dual-tone gridlines with accent marks
     for (let x = 0; x <= MAP_SIZE; x += 100) {
+      const isMajor = x % 500 === 0;
+      ctx.strokeStyle = isMajor ? 'rgba(20, 184, 166, 0.22)' : 'rgba(15, 118, 110, 0.08)';
+      ctx.lineWidth = isMajor ? 1.5 : 0.5;
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, MAP_SIZE);
       ctx.stroke();
     }
     for (let y = 0; y <= MAP_SIZE; y += 100) {
+      const isMajor = y % 500 === 0;
+      ctx.strokeStyle = isMajor ? 'rgba(20, 184, 166, 0.22)' : 'rgba(15, 118, 110, 0.08)';
+      ctx.lineWidth = isMajor ? 1.5 : 0.5;
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(MAP_SIZE, y);
       ctx.stroke();
     }
 
-    // Map boundaries red glow borders
-    ctx.strokeStyle = '#ef4444';
-    ctx.lineWidth = 4;
+    // Map boundaries thick glowing borders
+    ctx.strokeStyle = 'rgba(239, 68, 68, 0.8)';
+    ctx.lineWidth = 5;
+    ctx.strokeRect(0, 0, MAP_SIZE, MAP_SIZE);
+    
+    // Boundary interior neon laser shadow
+    ctx.strokeStyle = 'rgba(239, 68, 68, 0.2)';
+    ctx.lineWidth = 20;
     ctx.strokeRect(0, 0, MAP_SIZE, MAP_SIZE);
 
-    // 2. Draw Mineral Nodes (Gold/Amber Crystal Formations)
+    // 2. Draw Mineral Nodes (3D Extruded Crystals with dynamic shading based on ResourceType)
     state.mineralsNodes.forEach(node => {
       if (node.amount <= 0) return;
 
-      // Draw crystal cluster gradient glow
-      const radialGlow = ctx.createRadialGradient(node.x, node.y, 2, node.x, node.y, node.size * 2);
-      radialGlow.addColorStop(0, 'rgba(234, 179, 8, 0.45)');
-      radialGlow.addColorStop(1, 'rgba(234, 179, 8, 0.0)');
-      ctx.fillStyle = radialGlow;
+      const size = node.size;
+      const height = size * 0.95; // 3D extrusion height
+
+      // Dynamic color schemes and gradients for 3D realism
+      let coreColor = '#facc15'; // gold
+      let darkSideColor = '#ca8a04';
+      let lightSideColor = '#fef08a';
+      let glowColor = 'rgba(234, 179, 8, 0.45)';
+
+      if (node.resourceType === ResourceType.WOOD) {
+        coreColor = '#22c55e'; // green wood
+        darkSideColor = '#15803d';
+        lightSideColor = '#86efac';
+        glowColor = 'rgba(34, 197, 94, 0.4)';
+      } else if (node.resourceType === ResourceType.STONE) {
+        coreColor = '#94a3b8'; // grey stone
+        darkSideColor = '#475569';
+        lightSideColor = '#cbd5e1';
+        glowColor = 'rgba(148, 163, 184, 0.3)';
+      } else if (node.resourceType === ResourceType.IRON) {
+        coreColor = '#ea580c'; // rusty iron orange
+        darkSideColor = '#9a3412';
+        lightSideColor = '#ffedd5';
+        glowColor = 'rgba(234, 88, 12, 0.4)';
+      } else if (node.resourceType === ResourceType.COAL) {
+        coreColor = '#3f3f46'; // charcoal
+        darkSideColor = '#18181b';
+        lightSideColor = '#71717a';
+        glowColor = 'rgba(63, 63, 70, 0.35)';
+      } else if (node.resourceType === ResourceType.OIL) {
+        coreColor = '#06b6d4'; // neon oil cyan
+        darkSideColor = '#0891b2';
+        lightSideColor = '#67e8f9';
+        glowColor = 'rgba(6, 182, 212, 0.45)';
+      }
+
+      // Draw crystal base ambient shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
       ctx.beginPath();
-      ctx.arc(node.x, node.y, node.size * 2, 0, Math.PI * 2);
+      ctx.ellipse(node.x + size * 0.3, node.y + size * 0.4, size * 1.1, size * 0.6, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw multifaceted crystalline structure
-      ctx.fillStyle = '#facc15'; // core gold yellow
-      ctx.strokeStyle = '#eab308';
-      ctx.lineWidth = 1.5;
-
+      // Ambient radial glow
+      const radialGlow = ctx.createRadialGradient(node.x, node.y, 2, node.x, node.y, size * 2.2);
+      radialGlow.addColorStop(0, glowColor);
+      radialGlow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = radialGlow;
       ctx.beginPath();
-      ctx.moveTo(node.x, node.y - node.size);
-      ctx.lineTo(node.x + node.size * 0.8, node.y - node.size * 0.3);
-      ctx.lineTo(node.x + node.size * 0.5, node.y + node.size * 0.7);
-      ctx.lineTo(node.x - node.size * 0.5, node.y + node.size * 0.7);
-      ctx.lineTo(node.x - node.size * 0.8, node.y - node.size * 0.3);
+      ctx.arc(node.x, node.y, size * 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Render 3D Extruded Crystalline Pillars (3 distinct faces: Front, Dark Right, Light Left)
+      const topY = node.y - height;
+
+      // Dark Right side facet
+      ctx.fillStyle = darkSideColor;
+      ctx.beginPath();
+      ctx.moveTo(node.x, node.y);
+      ctx.lineTo(node.x + size * 0.8, node.y - size * 0.25);
+      ctx.lineTo(node.x + size * 0.8, topY - size * 0.25);
+      ctx.lineTo(node.x, topY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Light Left side facet
+      ctx.fillStyle = lightSideColor;
+      ctx.beginPath();
+      ctx.moveTo(node.x, node.y);
+      ctx.lineTo(node.x - size * 0.8, node.y - size * 0.25);
+      ctx.lineTo(node.x - size * 0.8, topY - size * 0.25);
+      ctx.lineTo(node.x, topY);
+      ctx.closePath();
+      ctx.fill();
+
+      // Cap/Crown top facet
+      ctx.fillStyle = coreColor;
+      ctx.strokeStyle = lightSideColor;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(node.x, topY);
+      ctx.lineTo(node.x + size * 0.8, topY - size * 0.25);
+      ctx.lineTo(node.x, topY - size * 0.8);
+      ctx.lineTo(node.x - size * 0.8, topY - size * 0.25);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
 
-      // Facets inside crystal for lovely visual realism
-      ctx.strokeStyle = '#fef08a';
-      ctx.lineWidth = 1;
+      // Sharp reflective center highlight
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(node.x, node.y - node.size);
-      ctx.lineTo(node.x, node.y + node.size * 0.7);
       ctx.moveTo(node.x, node.y);
-      ctx.lineTo(node.x + node.size * 0.8, node.y - node.size * 0.3);
-      ctx.moveTo(node.x, node.y);
-      ctx.lineTo(node.x - node.size * 0.8, node.y - node.size * 0.3);
+      ctx.lineTo(node.x, topY);
       ctx.stroke();
 
-      // Display remaining gold amount
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '10px monospace';
+      // Display remaining gold/resource amount (Futuristic glowing label)
+      ctx.fillStyle = '#cbd5e1';
+      ctx.shadowColor = coreColor;
+      ctx.shadowBlur = 4;
+      ctx.font = 'bold 9.5px monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(`${node.amount}`, node.x, node.y - node.size - 5);
+      ctx.fillText(`${node.amount}`, node.x, topY - size * 1.1);
+      ctx.shadowBlur = 0; // reset shadow
     });
 
-    // 3. Draw Buildings
+    // 3. Draw Buildings (3D Cylindrical & Hexagonal Volumetric Extrusions)
     state.buildings.forEach(b => {
-      // Selection ring under building
+      const height = b.size * 0.85; // height of the 3D extrusion
+
+      // Selection ring on the ground under building
       if (b.id === state.selectedBuildingId) {
         ctx.strokeStyle = b.player === PlayerType.PLAYER ? '#2dd4bf' : '#f43f5e';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([5, 3]);
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([6, 4]);
         ctx.beginPath();
-        ctx.arc(b.x, b.y, b.size + 10, 0, Math.PI * 2);
+        ctx.ellipse(b.x, b.y, b.size + 12, b.size * 0.6 + 6, 0, 0, Math.PI * 2);
         ctx.stroke();
         ctx.setLineDash([]); // clear dash
       }
 
-      // Draw building base structure
-      ctx.fillStyle = b.player === PlayerType.PLAYER ? '#0f766e' : '#991b1b'; // team primary color
-      ctx.strokeStyle = b.player === PlayerType.PLAYER ? '#2dd4bf' : '#f43f5e'; // team glow outline
-      ctx.lineWidth = b.isComplete ? 3.5 : 1.5;
+      // Draw beautiful building base ground shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+      ctx.beginPath();
+      ctx.ellipse(b.x + b.size * 0.3, b.y + b.size * 0.4, b.size * 1.15, b.size * 0.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Set up building colors
+      let baseWallColor = b.player === PlayerType.PLAYER ? '#0d9488' : b.player === PlayerType.ENEMY ? '#b91c1c' : '#475569';
+      let darkWallColor = b.player === PlayerType.PLAYER ? '#0f766e' : b.player === PlayerType.ENEMY ? '#991b1b' : '#334155';
+      let lightWallColor = b.player === PlayerType.PLAYER ? '#14b8a6' : b.player === PlayerType.ENEMY ? '#ef4444' : '#64748b';
+      let roofColor = b.player === PlayerType.PLAYER ? '#115e59' : b.player === PlayerType.ENEMY ? '#7f1d1d' : '#1e293b';
+      let trimColor = b.player === PlayerType.PLAYER ? '#2dd4bf' : b.player === PlayerType.ENEMY ? '#f43f5e' : '#94a3b8';
 
       if (!b.isComplete) {
-        ctx.fillStyle = '#334155'; // gray scaffolding while constructing
+        // Scaffold / under construction look (holographic/rusty bronze)
+        baseWallColor = 'rgba(148, 163, 184, 0.4)';
+        darkWallColor = 'rgba(71, 85, 105, 0.3)';
+        lightWallColor = 'rgba(203, 213, 225, 0.5)';
+        roofColor = 'rgba(30, 41, 59, 0.2)';
+        trimColor = 'rgba(148, 163, 184, 0.6)';
       }
 
+      // 1. Draw 3D Volumetric Cylinder side wall
+      const wallGrad = ctx.createLinearGradient(b.x - b.size, b.y, b.x + b.size, b.y);
+      wallGrad.addColorStop(0, darkWallColor);
+      wallGrad.addColorStop(0.3, baseWallColor);
+      wallGrad.addColorStop(0.7, lightWallColor);
+      wallGrad.addColorStop(1, darkWallColor);
+
+      ctx.fillStyle = wallGrad;
       ctx.beginPath();
-      ctx.arc(b.x, b.y, b.size, 0, Math.PI * 2);
+      // Bottom curve half-ellipse
+      ctx.ellipse(b.x, b.y, b.size, b.size * 0.42, 0, 0, Math.PI, false);
+      // Right edge going up
+      ctx.lineTo(b.x + b.size, b.y - height);
+      // Top curve going left (flipped)
+      ctx.ellipse(b.x, b.y - height, b.size, b.size * 0.42, 0, Math.PI, 0, true);
+      // Left edge going down
+      ctx.lineTo(b.x - b.size, b.y);
+      ctx.closePath();
+      ctx.fill();
+
+      // 2. Draw 3D Roof structure (slightly overlapping cap)
+      ctx.fillStyle = roofColor;
+      ctx.strokeStyle = trimColor;
+      ctx.lineWidth = b.isComplete ? 3 : 1.5;
+      ctx.beginPath();
+      ctx.ellipse(b.x, b.y - height, b.size, b.size * 0.42, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
 
-      // Interior technical detail graphics
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.size * 0.65, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Specific building designs
-      if (b.type === BuildingType.COMMAND_CENTER) {
-        // Draw rotating radar dish line
-        const radarAngle = (state.gameTicks * 0.02) % (Math.PI * 2);
-        ctx.strokeStyle = b.player === PlayerType.PLAYER ? '#5eead4' : '#fda4af';
-        ctx.lineWidth = 3;
+      // 3. Draw Construction Scaffolding Rings if incomplete
+      if (!b.isComplete) {
+        ctx.strokeStyle = '#f59e0b'; // golden yellow scaffolding glow
+        ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.moveTo(b.x, b.y);
-        ctx.lineTo(b.x + Math.cos(radarAngle) * (b.size * 0.5), b.y + Math.sin(radarAngle) * (b.size * 0.5));
+        ctx.ellipse(b.x, b.y - height * 0.5, b.size * 1.1, b.size * 0.46, 0, 0, Math.PI * 2);
         ctx.stroke();
-
-        // Central beacon square
-        ctx.fillStyle = b.player === PlayerType.PLAYER ? '#14b8a6' : '#f43f5e';
-        ctx.fillRect(b.x - 6, b.y - 6, 12, 12);
-      } else if (b.type === BuildingType.BARRACKS) {
-        // Cross swords sign or geometric military hanger stripes
-        ctx.strokeStyle = '#64748b';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(b.x - b.size * 0.4, b.y - b.size * 0.4, b.size * 0.8, b.size * 0.8);
-      } else if (b.type === BuildingType.TURRET) {
-        // Find defense gun rotation target
-        const scan = findClosestEnemy({ x: b.x, y: b.y, player: b.player, range: b.attackRange }, state.units, state.buildings);
-        const aimAngle = scan ? getAngle(b.x, b.y, scan.target.x, scan.target.y) : (state.gameTicks * 0.005) % (Math.PI * 2);
-
-        // Draw gun barrel rotating
-        ctx.strokeStyle = '#94a3b8';
-        ctx.lineWidth = 7;
+        
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.3)';
         ctx.beginPath();
-        ctx.moveTo(b.x, b.y);
-        ctx.lineTo(b.x + Math.cos(aimAngle) * (b.size * 1.4), b.y + Math.sin(aimAngle) * (b.size * 1.4));
-        ctx.stroke();
-      } else if (b.type === BuildingType.HOUSE) {
-        // Draw standard geometric house shape/pattern inside
-        ctx.strokeStyle = b.player === PlayerType.PLAYER ? '#2dd4bf' : '#f43f5e';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        ctx.moveTo(b.x, b.y - b.size * 0.4);
-        ctx.lineTo(b.x + b.size * 0.45, b.y - b.size * 0.05);
-        ctx.lineTo(b.x + b.size * 0.45, b.y + b.size * 0.45);
-        ctx.lineTo(b.x - b.size * 0.45, b.y + b.size * 0.45);
-        ctx.lineTo(b.x - b.size * 0.45, b.y - b.size * 0.05);
-        ctx.closePath();
+        ctx.moveTo(b.x - b.size, b.y);
+        ctx.lineTo(b.x - b.size * 1.1, b.y - height * 0.5);
+        ctx.lineTo(b.x - b.size, b.y - height);
+        ctx.moveTo(b.x + b.size, b.y);
+        ctx.lineTo(b.x + b.size * 1.1, b.y - height * 0.5);
+        ctx.lineTo(b.x + b.size, b.y - height);
         ctx.stroke();
       }
 
-      // Building Name and HP text
+      // 4. Custom 3D Roof Top Assets
+      if (b.isComplete) {
+        if (b.type === BuildingType.COMMAND_CENTER) {
+          // Radar tower neck
+          ctx.fillStyle = darkWallColor;
+          ctx.fillRect(b.x - 5, b.y - height - 12, 10, 12);
+
+          // Rotating radar dish base
+          const radarAngle = (state.gameTicks * 0.025) % (Math.PI * 2);
+          const radarX = b.x + Math.cos(radarAngle) * (b.size * 0.45);
+          const radarY = b.y - height - 12 + Math.sin(radarAngle) * (b.size * 0.18);
+
+          ctx.strokeStyle = trimColor;
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(b.x, b.y - height - 12);
+          ctx.lineTo(radarX, radarY);
+          ctx.stroke();
+
+          // Radar blinking central node
+          ctx.fillStyle = '#38bdf8'; // bright sky cyan neon beacon
+          ctx.shadowColor = '#06b6d4';
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(b.x, b.y - height - 12, 5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        } else if (b.type === BuildingType.BARRACKS) {
+          // Dual industrial exhausts on the 3D roof
+          ctx.fillStyle = '#0f172a';
+          ctx.strokeStyle = trimColor;
+          ctx.lineWidth = 1.5;
+          
+          ctx.fillRect(b.x - b.size * 0.4 - 3, b.y - height - 14, 6, 14);
+          ctx.fillRect(b.x + b.size * 0.4 - 3, b.y - height - 14, 6, 14);
+
+          // Smoke particle emitters
+          if (state.gameTicks % 15 === 0) {
+            state.particles.push({
+              x: b.x - b.size * 0.4 + (Math.random() * 2 - 1),
+              y: b.y - height - 14,
+              vx: -0.2 - Math.random() * 0.3,
+              vy: -1.2 - Math.random() * 0.6,
+              color: 'rgba(148, 163, 184, 0.45)',
+              size: 3.5 + Math.random() * 2.5,
+              alpha: 0.8,
+              decay: 0.015
+            });
+          }
+        } else if (b.type === BuildingType.TURRET) {
+          // Double defensive gun rotation turret base
+          const scan = findClosestEnemy({ x: b.x, y: b.y, player: b.player, range: b.attackRange }, state.units, state.buildings);
+          const aimAngle = scan ? getAngle(b.x, b.y, scan.target.x, scan.target.y) : (state.gameTicks * 0.006) % (Math.PI * 2);
+
+          const muzzleX = b.x + Math.cos(aimAngle) * (b.size * 1.35);
+          const muzzleY = b.y - height + Math.sin(aimAngle) * (b.size * 0.5);
+
+          // Rotatable muzzle platform
+          ctx.fillStyle = darkWallColor;
+          ctx.beginPath();
+          ctx.ellipse(b.x, b.y - height, b.size * 0.6, b.size * 0.28, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Barrel shadows & main barrels
+          ctx.strokeStyle = '#475569';
+          ctx.lineWidth = 7.5;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          // Draw offset double barrels for professional high-tech look
+          const barrelOffsetY = 4.5;
+          ctx.moveTo(b.x - Math.sin(aimAngle) * barrelOffsetY, b.y - height + Math.cos(aimAngle) * barrelOffsetY * 0.4);
+          ctx.lineTo(muzzleX - Math.sin(aimAngle) * barrelOffsetY, muzzleY + Math.cos(aimAngle) * barrelOffsetY * 0.4);
+          
+          ctx.moveTo(b.x + Math.sin(aimAngle) * barrelOffsetY, b.y - height - Math.cos(aimAngle) * barrelOffsetY * 0.4);
+          ctx.lineTo(muzzleX + Math.sin(aimAngle) * barrelOffsetY, muzzleY - Math.cos(aimAngle) * barrelOffsetY * 0.4);
+          ctx.stroke();
+          ctx.lineCap = 'butt'; // reset
+        } else if (b.type === BuildingType.HOUSE) {
+          // Draw sleek glass solar dome top
+          const grad = ctx.createRadialGradient(b.x, b.y - height, 2, b.x, b.y - height, b.size * 0.55);
+          grad.addColorStop(0, 'rgba(56, 189, 248, 0.55)');
+          grad.addColorStop(1, 'rgba(15, 118, 110, 0.15)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.ellipse(b.x, b.y - height, b.size * 0.55, b.size * 0.23, 0, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (b.type === BuildingType.MINTING_CENTER) {
+          // Draw a spinning golden 3D holographic coin above the roof!
+          const spinAngle = (state.gameTicks * 0.04) % (Math.PI * 2);
+          const coinRadius = 11;
+          const coinY = b.y - height - 12 + Math.sin(state.gameTicks * 0.08) * 2; // hover bobbing
+
+          ctx.save();
+          ctx.translate(b.x, coinY);
+          ctx.scale(Math.cos(spinAngle), 1); // spin compression
+
+          // Coin gold gradient
+          const goldGrad = ctx.createLinearGradient(-coinRadius, -coinRadius, coinRadius, coinRadius);
+          goldGrad.addColorStop(0, '#fef08a');
+          goldGrad.addColorStop(0.5, '#eab308');
+          goldGrad.addColorStop(1, '#ca8a04');
+
+          ctx.fillStyle = goldGrad;
+          ctx.beginPath();
+          ctx.arc(0, 0, coinRadius, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Coin border rim
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(0, 0, coinRadius - 2, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // Central dollar/currency symbol
+          ctx.fillStyle = '#854d0e';
+          ctx.font = 'bold 9px Arial';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('﷼', 0, 0);
+
+          ctx.restore();
+        }
+      }
+
+      // Building Label name
       ctx.fillStyle = '#f8fafc';
-      ctx.font = 'bold 10.5px Inter';
+      ctx.font = 'bold 10px monospace';
       ctx.textAlign = 'center';
       const label = b.type === BuildingType.COMMAND_CENTER 
-        ? 'HQ' 
+        ? 'HQ / دژ مرکزی' 
         : b.type === BuildingType.BARRACKS 
-          ? 'BARRACKS' 
+          ? 'BARRACKS / پادگان' 
           : b.type === BuildingType.TURRET 
-            ? 'TURRET' 
-            : 'HOUSE';
-      ctx.fillText(label, b.x, b.y - b.size - 8);
+            ? 'TURRET / برج دفاعی' 
+            : b.type === BuildingType.HOUSE
+              ? 'HOUSE / پناهگاه'
+              : 'MINT / چاپخانه پول';
+      ctx.fillText(label, b.x, b.y - height - b.size * 0.42 - 12);
 
-      // HP Bar
+      // Building HP bar with sleek technical frames
       const hpPercent = b.hp / b.maxHp;
-      const barW = b.size * 1.5;
-      ctx.fillStyle = '#ef4444'; // Red negative
-      ctx.fillRect(b.x - barW / 2, b.y + b.size + 6, barW, 4.5);
-      ctx.fillStyle = '#22c55e'; // Green health
-      ctx.fillRect(b.x - barW / 2, b.y + b.size + 6, barW * hpPercent, 4.5);
+      const barW = b.size * 1.4;
+      const barY = b.y + b.size * 0.46 + 6;
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillRect(b.x - barW / 2 - 1, barY - 1, barW + 2, 6);
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.8)';
+      ctx.fillRect(b.x - barW / 2, barY, barW, 4);
+      ctx.fillStyle = 'rgba(34, 197, 94, 0.95)';
+      ctx.fillRect(b.x - barW / 2, barY, barW * hpPercent, 4);
     });
 
-    // 4. Draw Units
+    // 4. Draw Units (3D Glossy Spheres with dynamic walk-bobbing animation)
     state.units.forEach(u => {
-      // Draw selection shadow circle under selected units
+      // Dynamic vertical walk-bobbing effect
+      const isMoving = u.state !== UnitState.IDLE;
+      const bobSpeed = u.type === UnitType.HEAVY ? 0.12 : 0.24;
+      const bobAmplitude = u.type === UnitType.HEAVY ? 1.5 : 3.5;
+      const bobY = isMoving ? Math.sin(state.gameTicks * bobSpeed) * bobAmplitude : 0;
+      
+      const unitY = u.y + bobY - 4; // elevate unit body slightly
+
+      // Draw soft drop shadow on ground (stays flat, does not bob!)
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.42)';
+      ctx.beginPath();
+      ctx.ellipse(u.x, u.y + u.size * 0.3, u.size * 1.0, u.size * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Selection ring
       if (u.selected) {
-        ctx.fillStyle = 'rgba(45, 212, 191, 0.22)';
         ctx.strokeStyle = '#2dd4bf';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.arc(u.x, u.y, u.size + 4, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.ellipse(u.x, u.y + u.size * 0.35, u.size + 4, (u.size + 4) * 0.45, 0, 0, Math.PI * 2);
         ctx.stroke();
       }
 
-      // Base Unit circle body
-      ctx.fillStyle = u.player === PlayerType.PLAYER ? '#14b8a6' : '#e11d48'; // electric cyan vs rose crimson
+      // Spherical radial highlight rendering
+      const sphereGrad = ctx.createRadialGradient(u.x - u.size * 0.25, unitY - u.size * 0.25, 1, u.x, unitY, u.size);
+      
+      const primaryColor = u.player === PlayerType.PLAYER ? '#14b8a6' : '#f43f5e';
+      const secondaryColor = u.player === PlayerType.PLAYER ? '#0d9488' : '#be123c';
+      const specularColor = u.player === PlayerType.PLAYER ? '#99f6e4' : '#fecdd3';
+
+      sphereGrad.addColorStop(0, specularColor);
+      sphereGrad.addColorStop(0.3, primaryColor);
+      sphereGrad.addColorStop(1, secondaryColor);
+
+      ctx.fillStyle = sphereGrad;
       ctx.beginPath();
-      ctx.arc(u.x, u.y, u.size, 0, Math.PI * 2);
+      ctx.arc(u.x, unitY, u.size, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw direction gun/pointer
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(u.x, u.y);
-      ctx.lineTo(u.x + Math.cos(u.angle) * (u.size + 3), u.y + Math.sin(u.angle) * (u.size + 3));
+      // Draw shiny 3D border around unit dome
+      ctx.strokeStyle = specularColor;
+      ctx.lineWidth = 0.8;
       ctx.stroke();
 
-      // Specific unit decor
+      // Draw direction pointer/gun barrel
+      const barrelLen = u.size * 1.45;
+      const muzzleX = u.x + Math.cos(u.angle) * barrelLen;
+      const muzzleY = unitY + Math.sin(u.angle) * barrelLen;
+
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = u.type === UnitType.HEAVY ? 4.5 : 2.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(u.x, unitY);
+      ctx.lineTo(muzzleX, muzzleY);
+      ctx.stroke();
+      ctx.lineCap = 'butt'; // reset
+
+      // Specific unit decorations
       if (u.type === UnitType.WORKER) {
-        // Wrench accessory
-        ctx.strokeStyle = '#fbbf24';
+        // Rotational wrench accent on workers
+        const wrenchAngle = (state.gameTicks * 0.05) % (Math.PI * 2);
+        ctx.strokeStyle = '#f59e0b';
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(u.x, u.y, u.size * 0.4, 0, Math.PI * 2);
+        ctx.arc(u.x + Math.cos(wrenchAngle) * 5, unitY + Math.sin(wrenchAngle) * 5, 2, 0, Math.PI * 2);
         ctx.stroke();
 
-        // Draw carried gold crystal on back
+        // Draw 3D carried crystalline cargo block on back
         if (u.carryAmount > 0) {
           ctx.fillStyle = '#fbbf24';
-          ctx.fillRect(u.x - 3, u.y - 12, 6, 6);
+          ctx.fillRect(u.x - 3, unitY - u.size - 6, 6, 6);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 0.5;
+          ctx.strokeRect(u.x - 3, unitY - u.size - 6, 6, 6);
         }
       } else if (u.type === UnitType.HEAVY) {
-        // Double turret tracks decor
-        ctx.strokeStyle = '#475569';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(u.x - 12, u.y - 12, 24, 24);
+        // Heavy crawler tracks drawn underneath the hovering dome
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(u.x - 12, u.y - 1, 24, 3.5);
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(u.x - 12, u.y - 1, 24, 3.5);
       }
 
-      // Unit health bar (only drawn if selected or injured to keep screen clean and pretty)
+      // Unit health bar (drawn if selected or injured to keep viewport clean)
       const isInjured = u.hp < u.maxHp;
       if (u.selected || isInjured) {
         const hpPercent = u.hp / u.maxHp;
-        const barW = u.size * 2;
-        ctx.fillStyle = 'rgba(239, 68, 68, 0.7)';
-        ctx.fillRect(u.x - barW / 2, u.y - u.size - 7, barW, 3);
+        const barW = u.size * 1.8;
+        const barY = unitY - u.size - 6;
+
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+        ctx.fillRect(u.x - barW / 2 - 0.5, barY - 0.5, barW + 1, 4);
+        ctx.fillStyle = 'rgba(239, 68, 68, 0.8)';
+        ctx.fillRect(u.x - barW / 2, barY, barW, 3);
         ctx.fillStyle = 'rgba(34, 197, 94, 0.95)';
-        ctx.fillRect(u.x - barW / 2, u.y - u.size - 7, barW * hpPercent, 3);
+        ctx.fillRect(u.x - barW / 2, barY, barW * hpPercent, 3);
       }
     });
 
@@ -1602,9 +1865,10 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
 
     const cam = stateRef.current.camera;
 
-    // Center camera viewport there
-    stateRef.current.camera.x = Math.max(0, Math.min(MAP_SIZE - cam.width, targetMapX - cam.width / 2));
-    stateRef.current.camera.y = Math.max(0, Math.min(MAP_SIZE - cam.height, targetMapY - cam.height / 2));
+    // Center camera viewport there with smooth margins
+    const camPad = 400;
+    stateRef.current.camera.x = Math.max(-camPad, Math.min(MAP_SIZE - cam.width + camPad, targetMapX - cam.width / 2));
+    stateRef.current.camera.y = Math.max(-camPad, Math.min(MAP_SIZE - cam.height + camPad, targetMapY - cam.height / 2));
     
     sound.playSelect();
   };
@@ -1681,8 +1945,9 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       const dx = screenX - state.panStart.x;
       const dy = screenY - state.panStart.y;
 
-      state.camera.x = Math.max(0, Math.min(MAP_SIZE - state.camera.width, state.camera.x - dx));
-      state.camera.y = Math.max(0, Math.min(MAP_SIZE - state.camera.height, state.camera.y - dy));
+      const camPad = 400;
+      state.camera.x = Math.max(-camPad, Math.min(MAP_SIZE - state.camera.width + camPad, state.camera.x - dx));
+      state.camera.y = Math.max(-camPad, Math.min(MAP_SIZE - state.camera.height + camPad, state.camera.y - dy));
 
       state.panStart = { x: screenX, y: screenY };
     }
@@ -1933,6 +2198,10 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       if (!hasBarracks) {
         return { satisfied: false, errorKey: 'barracksRequired' };
       }
+    } else if (type === BuildingType.MINTING_CENTER) {
+      if (!hasCC) {
+        return { satisfied: false, errorKey: 'ccRequired' };
+      }
     }
     return { satisfied: true, errorKey: '' };
   };
@@ -2089,6 +2358,8 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
           workerAssignments={workerAssignments}
           onUpdateWorkerAssignments={handleUpdateWorkerAssignments}
           onUpdateRelation={handleUpdateRelation}
+          onUpdateResources={handleUpdateResources}
+          buildings={stateRef.current.buildings}
         />
       </div>
     </div>
