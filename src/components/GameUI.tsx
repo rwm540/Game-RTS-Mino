@@ -45,6 +45,8 @@ interface GameUIProps {
   maxPopulation: number;
   errorMessage: string | null;
   onClearErrorMessage: () => void;
+  onSaveGame: (slot: string) => void;
+  onLoadGame: (slot: string) => void;
   
   // Custom RTS variables
   resources: {
@@ -123,6 +125,8 @@ export default function GameUI({
   maxPopulation,
   errorMessage,
   onClearErrorMessage,
+  onSaveGame,
+  onLoadGame,
   
   // Custom props
   resources,
@@ -135,6 +139,7 @@ export default function GameUI({
 }: GameUIProps) {
   const t = translations[language];
   const [showDiplomacy, setShowDiplomacy] = useState(false);
+  const [showSaveLoad, setShowSaveLoad] = useState(false);
   const [showWorkersPanel, setShowWorkersPanel] = useState(true);
   const [showEconomyDashboard, setShowEconomyDashboard] = useState(false);
   
@@ -326,6 +331,19 @@ export default function GameUI({
           >
             <HeartHandshake className="w-3.5 h-3.5" />
             دیپلماسی / Diplomacy
+          </button>
+
+          {/* Save/Load Button */}
+          <button
+            id="ui-save-load-btn"
+            onClick={() => {
+              setShowSaveLoad(true);
+              sound.playSelect();
+            }}
+            className="px-3 py-1 bg-amber-950/50 border border-amber-500/40 text-amber-400 rounded text-[11px] font-black tracking-widest transition-all cursor-pointer hover:bg-amber-500 hover:text-slate-950 flex items-center gap-1"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            سیو-لود / Save-Load
           </button>
 
           <button
@@ -569,6 +587,44 @@ export default function GameUI({
                   </div>
                 );
               })}
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Save/Load Modal */}
+      {showSaveLoad && (
+        <div className="absolute inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-md bg-slate-950 border-2 border-amber-500/40 rounded-xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.3)]"
+          >
+            {/* Header */}
+            <div className="bg-amber-950/40 border-b border-amber-500/30 px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="text-amber-400 w-5 h-5" />
+                <h2 className="text-base font-black text-white uppercase tracking-wider font-mono">ذخیره / بارگذاری</h2>
+              </div>
+              <button 
+                onClick={() => setShowSaveLoad(false)}
+                className="text-slate-400 hover:text-white text-lg font-mono cursor-pointer transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Slots */}
+            <div className="p-6 space-y-4 font-mono">
+              {['1', '2', '3'].map(slot => (
+                <div key={slot} className="bg-black/50 border border-slate-800 rounded-lg p-4 flex items-center justify-between">
+                  <span className="text-sm font-bold text-amber-200">اسلات {slot}</span>
+                  <div className="flex gap-2">
+                    <button onClick={() => { onSaveGame(slot); setShowSaveLoad(false); }} className="px-3 py-1 bg-amber-950/40 border border-amber-500/30 text-amber-300 text-[10px] uppercase font-bold rounded cursor-pointer hover:bg-amber-900/60 transition-all">ذخیره</button>
+                    <button onClick={() => { onLoadGame(slot); setShowSaveLoad(false); }} className="px-3 py-1 bg-cyan-950/40 border border-cyan-500/30 text-cyan-300 text-[10px] uppercase font-bold rounded cursor-pointer hover:bg-cyan-900/60 transition-all">بارگذاری</button>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>

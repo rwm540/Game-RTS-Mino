@@ -79,6 +79,7 @@ export interface Unit {
   killCount: number;
   factionId?: string;
   role?: ResourceType;
+  isRoleLocked?: boolean;
 }
 
 export interface Building {

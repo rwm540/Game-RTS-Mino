@@ -304,6 +304,51 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
     sound.playBuildComplete();
   }, [difficulty]);
 
+  // Save/Load functionality
+  const saveGame = (slot: string) => {
+    try {
+      const state = stateRef.current;
+      const saveData = JSON.stringify({
+        minerals: state.minerals,
+        resources: state.resources,
+        units: state.units,
+        buildings: state.buildings,
+        upgrades: state.upgrades,
+        gameTicks: state.gameTicks,
+        difficulty: difficulty,
+      });
+      localStorage.setItem(`game_save_${slot}`, saveData);
+      alert('بازی ذخیره شد.');
+    } catch (e) {
+      console.error('Failed to save game:', e);
+      alert('خطا در ذخیره‌سازی.');
+    }
+  };
+
+  const loadGame = (slot: string) => {
+    try {
+      const savedData = localStorage.getItem(`game_save_${slot}`);
+      if (!savedData) {
+        alert('فایلی برای بارگذاری یافت نشد.');
+        return;
+      }
+      const parsed = JSON.parse(savedData);
+      const state = stateRef.current;
+      
+      state.minerals = parsed.minerals;
+      state.resources = parsed.resources;
+      state.units = parsed.units;
+      state.buildings = parsed.buildings;
+      state.upgrades = parsed.upgrades;
+      state.gameTicks = parsed.gameTicks;
+      
+      alert('بازی بارگذاری شد.');
+    } catch (e) {
+      console.error('Failed to load game:', e);
+      alert('خطا در بارگذاری.');
+    }
+  };
+
   // Handle Resize and Canvas Rendering Loop
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -467,7 +512,7 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
           } else {
             w.role = ResourceType.GOLD;
           }
-        } else {
+        } else if (!w.isRoleLocked) {
           const currentRole = w.role;
           if (roleCounts[currentRole] > targetCounts[currentRole]) {
             const unfilledRole = (Object.keys(targetCounts) as Array<keyof typeof targetCounts>).find(
@@ -490,6 +535,11 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
       playerWorkers.forEach(w => {
         if (w.state === UnitState.IDLE && w.role) {
           const nodes = state.mineralsNodes.filter(n => n.resourceType === w.role && n.amount > 0);
+          
+          if (nodes.length === 0) {
+            w.role = undefined;
+            w.isRoleLocked = false;
+          }
           let closestNode = null;
           let minDist = Infinity;
           nodes.forEach(n => {
@@ -2079,6 +2129,8 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
             u.targetId = tappedMineralId;
             u.targetX = tappedMineralNode!.x;
             u.targetY = tappedMineralNode!.y;
+            u.role = tappedMineralNode!.resourceType;
+            u.isRoleLocked = true;
           }
         });
         sound.playCommand();
@@ -2352,6 +2404,8 @@ export default function GameCanvas({ difficulty, language, onGameOver, onBackToM
           maxPopulation={maxPopulation}
           errorMessage={errorMessage}
           onClearErrorMessage={() => setErrorMessage(null)}
+          onSaveGame={saveGame}
+          onLoadGame={loadGame}
           
           resources={resources}
           factions={factions}
