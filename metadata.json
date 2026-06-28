@@ -1,0 +1,6 @@
+{
+  "name": "RTS Battle Commander",
+  "description": "An immersive real-time strategy (RTS) game optimized for mobile touch and web browser controls, featuring base building, resource gathering, unit training, and an active smart AI opponent.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
